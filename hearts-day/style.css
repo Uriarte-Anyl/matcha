@@ -1,0 +1,230 @@
+@import url("https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: hsl(0, 0%, 7%);
+}
+
+#valentines-wrapper {
+  width: 80vw;
+  margin: 25vh auto;
+}
+
+.valentines-text {
+  fill: none;
+  stroke: #ff1744;
+  stroke-miterlimit: 10;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+  stroke-dasharray: 2000;
+  stroke-dashoffset: 2000;
+  animation: write 20s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  font-family: "Tangerine", cursive;
+  font-size: 48px;
+  font-weight: 700;
+  filter: drop-shadow(2px 2px 4px rgba(255, 20, 56, 0.2));
+}
+
+section {
+  position: relative;
+  width: 100%;
+  min-height: 100svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.intro,
+.trail-container {
+  height: 100svh;
+}
+
+.trail-container {
+  background-color: hsl(0, 0%, 99%);
+  font-family: "Barlow";
+}
+
+.trail-img {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 4px;
+  transform-origin: center;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Bouquet Maker Styles */
+.wrap-up {
+  background-color: hsl(0, 0%, 7%);
+  flex-direction: column;
+  padding: 60px 20px;
+  gap: 40px;
+}
+
+.bouquet-title {
+  font-family: "Barlow";
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#drop-zone {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  border: 4px dashed #ff1744;
+  border-radius: 20px;
+  background: hsl(0, 0%, 7%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+#drop-zone.drag-over {
+  background: rgba(255, 23, 68, 0.1);
+  border-color: #ff6b9d;
+  transform: scale(1.02);
+}
+
+.drop-text {
+  font-family: "Barlow";
+  font-size: 24px;
+  color: #ff1744;
+  opacity: 0.6;
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+}
+
+#dropped-flowers {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+#final-bouquet {
+  position: absolute;
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+  z-index: 10;
+  animation: bouquetReveal 1s ease-in-out;
+}
+
+.flower-selection {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.draggable-flower {
+  width: 240px;
+  height: 240px;
+  cursor: grab;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+  /* background: white; */
+  border-radius: 15px;
+  padding: 10px;
+  /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); */
+}
+
+.draggable-flower:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.draggable-flower.dragging {
+  opacity: 0.5;
+  cursor: grabbing;
+}
+
+.draggable-flower.used {
+  opacity: 0.3;
+  pointer-events: none;
+  filter: grayscale(100%);
+}
+
+.draggable-flower img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+.dropped-flower {
+  width: 100px;
+  height: 100px;
+  animation: flowerDrop 0.5s ease-out;
+}
+
+.dropped-flower img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Animations */
+@keyframes write {
+  0% {
+    stroke-dashoffset: 2000;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  70% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes flowerDrop {
+  0% {
+    transform: translateY(-50px) scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(10px) scale(1.1);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes bouquetReveal {
+  0% {
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.1) rotate(10deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
